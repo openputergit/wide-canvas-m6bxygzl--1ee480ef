@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Management - Create Account</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f5f5f5;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gray-50">
+    <div class="max-w-md mx-auto p-6">
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <!-- Header with back button -->
+            <div class="flex items-center mb-6">
+                <button class="text-gray-600 hover:text-gray-800">
+                    <i class="bi bi-arrow-left text-xl"></i>
+                </button>
+                <h1 class="text-xl font-semibold ml-4">Create Account</h1>
+            </div>
+
+            <!-- Registration Form -->
+            <form id="registrationForm" class="space-y-4">
+                <div>
+                    <p class="text-sm font-medium text-gray-600 mb-4">Personal Details</p>
+                    <div class="space-y-4">
+                        <div>
+                            <input type="text" id="fullName" placeholder="Enter your full name" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none" required>
+                        </div>
+                        
+                        <div>
+                            <input type="tel" id="contactNumber" placeholder="Enter your phone number" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none" required>
+                        </div>
+
+                        <div>
+                            <input type="email" id="email" placeholder="Enter your email address (Optional)" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none">
+                        </div>
+
+                        <div>
+                            <input type="date" id="dob" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none text-gray-500">
+                        </div>
+
+                        <div>
+                            <select id="department" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none text-gray-500" required>
+                                <option value="" selected disabled>Select your department</option>
+                                <option value="security">Security Guard</option>
+                                <option value="supervisor">Supervisor</option>
+                                <option value="admin">Administrator</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <input type="text" id="employeeId" placeholder="Enter your employee ID" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none" required>
+                        </div>
+
+                        <div class="relative">
+                            <input type="password" id="password" placeholder="Create password" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none" required>
+                            <button type="button" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500" onclick="togglePassword()">
+                                <i class="bi bi-eye"></i>
+                            </button>
+                        </div>
+
+                        <!-- Password Requirements -->
+                        <div class="space-y-2">
+                            <div class="flex items-center space-x-2 text-sm">
+                                <i class="bi bi-check-circle-fill text-green-500"></i>
+                                <span class="text-gray-600">At least 8 characters</span>
+                            </div>
+                            <div class="flex items-center space-x-2 text-sm">
+                                <i class="bi bi-check-circle-fill text-green-500"></i>
+                                <span class="text-gray-600">Include uppercase & lowercase letters</span>
+                            </div>
+                            <div class="flex items-center space-x-2 text-sm">
+                                <i class="bi bi-check-circle-fill text-green-500"></i>
+                                <span class="text-gray-600">Include at least one number</span>
+                            </div>
+                            <div class="flex items-center space-x-2 text-sm">
+                                <i class="bi bi-check-circle-fill text-green-500"></i>
+                                <span class="text-gray-600">Include at least one special character</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="w-full bg-black text-white py-3 rounded-lg font-medium hover:bg-gray-800 transition-colors">
+                    Create Account
+                </button>
+
+                <p class="text-sm text-gray-600 text-center mt-4">
+                    By creating an account, you agree to our <a href="#" class="text-blue-600">Terms & Privacy Policy</a>
+                </p>
+
+                <p class="text-sm text-center">
+                    Already have an account? <a href="#" class="text-blue-600">Sign in</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Toggle password visibility
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const icon = document.querySelector('#password + button i');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                icon.classList.remove('bi-eye');
+                icon.classList.add('bi-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                icon.classList.remove('bi-eye-slash');
+                icon.classList.add('bi-eye');
+            }
+        }
+
+        // Form submission
+        document.getElementById('registrationForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = {
+                fullName: document.getElementById('fullName').value,
+                contactNumber: document.getElementById('contactNumber').value,
+                email: document.getElementById('email').value,
+                dateOfBirth: document.getElementById('dob').value,
+                department: document.getElementById('department').value,
+                employeeId: document.getElementById('employeeId').value,
+                password: document.getElementById('password').value
+            };
+
+            try {
+                // Show loading state
+                const submitButton = e.target.querySelector('button[type="submit"]');
+                submitButton.disabled = true;
+                submitButton.innerHTML = '<i class="bi bi-hourglass-split animate-spin mr-2"></i>Creating account...';
+
+                // API call to create user
+                const response = await fetch('https://r0c8kgwocscg8gsokogwwsw4.zetaverse.one/mongodb', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': 'Bearer 22qWno4a46SJYGUNy3jIx7260vN2',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        appSlug: 'security-management-123456',
+                        action: 'create',
+                        collection: 'users',
+                        data: formData
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    alert('Account created successfully!');
+                    // Redirect to login page or dashboard
+                    // window.location.href = '/login';
+                } else {
+                    throw new Error('Failed to create account');
+                }
+            } catch (error) {
+                alert('Error creating account: ' + error.message);
+            } finally {
+                submitButton.disabled = false;
+                submitButton.innerHTML = 'Create Account';
+            }
+        });
+
+        // Password validation
+        document.getElementById('password').addEventListener('input', (e) => {
+            const password = e.target.value;
+            const requirements = [
+                { regex: /.{8,}/, index: 0 }, // At least 8 characters
+                { regex: /(?=.*[a-z])(?=.*[A-Z])/, index: 1 }, // Upper & lowercase
+                { regex: /(?=.*\d)/, index: 2 }, // Number
+                { regex: /(?=.*[!@#$%^&*])/, index: 3 } // Special character
+            ];
+
+            requirements.forEach(({ regex, index }) => {
+                const checkIcon = document.querySelectorAll('.bi-check-circle-fill')[index];
+                if (regex.test(password)) {
+                    checkIcon.classList.remove('text-gray-300');
+                    checkIcon.classList.add('text-green-500');
+                } else {
+                    checkIcon.classList.remove('text-green-500');
+                    checkIcon.classList.add('text-gray-300');
+                }
+            });
+        });
+    </script>
+<script>document.body.addEventListener('wheel', e => { if (!e.ctrlKey) return; e.preventDefault(); return }, { passive: false })</script>
+	</body>
+</html>
